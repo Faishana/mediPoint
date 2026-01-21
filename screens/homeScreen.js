@@ -37,9 +37,20 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f5f5f5' },
-  header: { padding: 15, backgroundColor: '#2e7dff', alignItems: 'center' },
-  headerText: { color: '#fff', fontSize: 18, fontWeight: 'bold' },
+  container: { 
+    flex: 1, 
+    ackgroundColor: '#f5f5f5' 
+  },
+  header: { 
+    padding: 15, 
+    backgroundColor: '#2e7dff', 
+    alignItems: 'center' 
+  },
+  headerText: { 
+    color: '#fff', 
+    fontSize: 18, 
+    fontWeight: 'bold' 
+  },
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',

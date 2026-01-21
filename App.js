@@ -1,21 +1,22 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import splashScreen from './screens/splashScreen';
-import loginScreen from './screens/LoginScreen';
-import homeScreen from './screens/homeScreen';
+
+import LoginScreen from './screens/LoginScreen';
+import BottomTabs from './navigation/BottomTabs';
+import RegisterScreen from './screens/RegisterScreen';
+import SplashScreen from './screens/splashScreen';
 
 const Stack = createNativeStackNavigator();
-
 
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name='splash' component={splashScreen} />
-        <Stack.Screen name='login' component={loginScreen} />
-        <Stack.Screen name='home' component={homeScreen} />
+        <Stack.Screen name='Splash' component={SplashScreen}/>
+        <Stack.Screen name="Register" component={RegisterScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Main" component={BottomTabs} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-

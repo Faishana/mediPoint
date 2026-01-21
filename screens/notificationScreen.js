@@ -1,20 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+// screens/NotificationScreen.js
+import { View, Text, FlatList } from 'react-native';
 
-export default function notificationScreen() {
+const notifications = [
+  { id: '1', text: 'Appointment confirmed' },
+  { id: '2', text: 'Doctor available today' },
+  { id: '3', text: 'New health tip added' }
+];
+
+export default function NotificationScreen() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <FlatList
+      data={notifications}
+      keyExtractor={(item) => item.id}
+      renderItem={({ item }) => (
+        <View style={{ padding: 15, borderBottomWidth: 1 }}>
+          <Text>{item.text}</Text>
+        </View>
+      )}
+    />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

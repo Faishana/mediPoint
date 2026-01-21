@@ -1,28 +1,23 @@
-// screens/LoginScreen.js
+// screens/RegisterScreen.js
 import { View, Text, TextInput, Button } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
 
-export default function LoginScreen({ navigation }) {
+export default function RegisterScreen({ navigation }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [msg, setMsg] = useState('');
 
-  const login = async () => {
-    const data = await AsyncStorage.getItem('user');
-    if (!data) return setMsg('No user found');
-
-    const user = JSON.parse(data);
-    if (username === user.username && password === user.password) {
-      navigation.replace('Main');
-    } else {
-      setMsg('Invalid credentials');
-    }
+  const register = async () => {
+    await AsyncStorage.setItem(
+      'user',
+      JSON.stringify({ username, password })
+    );
+    navigation.replace('Login');
   };
 
   return (
     <View style={{ padding: 20 }}>
-      <Text style={{ fontSize: 24 }}>Login</Text>
+      <Text style={{ fontSize: 24 }}>Register</Text>
 
       <TextInput
         placeholder="Username"
@@ -39,8 +34,7 @@ export default function LoginScreen({ navigation }) {
         style={{ borderWidth: 1, marginBottom: 20, padding: 10 }}
       />
 
-      <Button title="Login" onPress={login} />
-      <Text style={{ color: 'red', marginTop: 10 }}>{msg}</Text>
+      <Button title="Register" onPress={register} />
     </View>
   );
 }

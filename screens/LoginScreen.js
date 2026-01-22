@@ -27,7 +27,7 @@ export default function LoginScreen({ navigation }) {
       <View style={[styles.innerBox, { borderRadius: 30 }]}> 
         <Text style={styles.title}>Login</Text>
         <View style={styles.inputWrapper}>
-          <MaterialIcons name="person" size={24} color="#2196f3" style={styles.icon} />
+          <MaterialIcons name="person" size={24} color="#A5E49D" style={styles.icon} />
           <TextInput
             placeholder="Username"
             value={username}
@@ -37,7 +37,7 @@ export default function LoginScreen({ navigation }) {
           />
         </View>
         <View style={styles.inputWrapper}>
-          <MaterialIcons name="lock" size={24} color="#2196f3" style={styles.icon} />
+          <MaterialIcons name="lock" size={24} color="#A5E49D" style={styles.icon} />
           <TextInput
             placeholder="Password"
             secureTextEntry
@@ -47,7 +47,7 @@ export default function LoginScreen({ navigation }) {
           />
         </View>
         <View style={styles.buttonContainer}>
-          <Button title="Login" onPress={login} color="#2196f3" />
+          <Button title="Login" onPress={login} color="#A5E49D" />
         </View>
         {msg ? <Text style={styles.error}>{msg}</Text> : null}
       </View>
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: '#2196f3',
+    color: '#A5E49D',
     marginBottom: 32,
     alignSelf: 'center',
     letterSpacing: 1.2,
@@ -76,17 +76,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: '#b0c4de',
+    borderColor: '#A5E49D',
     marginBottom: 18,
     paddingHorizontal: 10,
     elevation: 2,
-    shadowColor: '#2196f3',
+    shadowColor: '#A5E49D',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.08,
     shadowRadius: 3,
   },
   icon: {
     marginRight: 8,
+    color: '#A5E49D',
   },
   input: {
     flex: 1,
@@ -120,5 +121,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     borderRadius: 20,
     elevation: 4,
+    borderWidth: 2,
+    borderColor: '#A5E49D',
   },
 });

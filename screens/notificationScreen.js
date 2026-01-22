@@ -37,7 +37,7 @@ export default function NotificationScreen() {
             <MaterialIcons
               name={readIds.includes(item.id) ? 'notifications-none' : 'notifications'}
               size={24}
-              color={readIds.includes(item.id) ? '#b0c4de' : '#2196f3'}
+              color={readIds.includes(item.id) ? '#b0c4de' : '#A5E49D'}
               style={styles.icon}
             />
             <Text
@@ -48,6 +48,14 @@ export default function NotificationScreen() {
             >
               {item.text}
             </Text>
+            {readIds.includes(item.id) && (
+              <MaterialIcons
+                name="check-circle"
+                size={20}
+                color="#A5E49D"
+                style={styles.readCheck}
+              />
+            )}
           </View>
         )}
         contentContainerStyle={{ paddingBottom: 20 }}
@@ -66,7 +74,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: width < 400 ? 20 : 24,
     fontWeight: 'bold',
-    color: '#2196f3',
+    color: '#A5E49D',
     marginBottom: width < 400 ? 12 : 20,
     alignSelf: 'center',
   },
@@ -78,7 +86,7 @@ const styles = StyleSheet.create({
     padding: width < 400 ? 10 : 18,
     marginBottom: width < 400 ? 8 : 14,
     elevation: 3,
-    shadowColor: '#2196f3',
+    shadowColor: '#A5E49D',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.08,
     shadowRadius: 4,
@@ -88,6 +96,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 12,
+    color: '#A5E49D',
   },
   notificationText: {
     fontSize: width < 400 ? 14 : 16,
@@ -96,5 +105,8 @@ const styles = StyleSheet.create({
   readText: {
     color: '#b0c4de',
     textDecorationLine: 'line-through',
+  },
+  readCheck: {
+    marginLeft: 10,
   },
 });

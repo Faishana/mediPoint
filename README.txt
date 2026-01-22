@@ -99,6 +99,7 @@ How to Run the Project
    expo install @react-navigation/bottom-tabs
    expo install react-native-screens react-native-safe-area-context
    expo install @react-native-async-storage/async-storage
+   npm install react-native-paper
 
 4. Start the Application
    expo start

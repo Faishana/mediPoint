@@ -1,9 +1,11 @@
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { MaterialIcons } from '@expo/vector-icons';
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const [username, setUsername] = useState('');
+  const [dateTime, setDateTime] = useState(new Date());
 
   useEffect(() => {
     const loadUser = async () => {
@@ -15,6 +17,20 @@ export default function HomeScreen() {
     };
     loadUser();
   }, []);
+
+  // Real-time clock
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setDateTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const handleLogout = async () => {
+    await AsyncStorage.removeItem('user');
+    navigation.replace('Register');
+  };
 
   const images = [
     require('../assets/img1.jpg'),
@@ -30,9 +46,16 @@ export default function HomeScreen() {
       <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.headerText}>
-          Welcome {username}
-        </Text>
+        <View>
+          <Text style={styles.headerText}>Welcome {username}</Text>
+          <Text style={styles.dateText}>
+            {dateTime.toLocaleDateString()} | {dateTime.toLocaleTimeString()}
+          </Text>
+        </View>
+
+        <TouchableOpacity onPress={handleLogout}>
+          <MaterialIcons name="logout" size={26} color="#fff" />
+        </TouchableOpacity>
       </View>
 
       {/* Image Grid */}
@@ -49,19 +72,26 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { 
-    flex: 1, 
-    backgroundColor: '#f5f5f5' 
+  container: {
+    flex: 1,
+    backgroundColor: '#f5f5f5'
   },
-  header: { 
-    padding: 15, 
-    backgroundColor: '#2e7dff', 
-    alignItems: 'center' 
+  header: {
+    padding: 15,
+    backgroundColor: '#2e7dff',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
-  headerText: { 
-    color: '#fff', 
-    fontSize: 18, 
-    fontWeight: 'bold' 
+  headerText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+  dateText: {
+    color: '#e0e0e0',
+    fontSize: 12,
+    marginTop: 4
   },
   grid: {
     flexDirection: 'row',

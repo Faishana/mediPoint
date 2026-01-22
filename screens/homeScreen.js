@@ -76,12 +76,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f5f5f5'
   },
-  header: {
-    padding: 15,
-    backgroundColor: '#2e7dff',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+  header: { 
+    padding: 15, 
+    backgroundColor: '#A5E49D', 
+    alignItems: 'center' 
   },
   headerText: {
     color: '#fff',

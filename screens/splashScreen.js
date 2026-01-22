@@ -1,4 +1,4 @@
-import { View, Image, StyleSheet, Animated } from 'react-native';
+import { View, Image, StyleSheet, Animated, StatusBar } from 'react-native';
 import { useEffect, useRef } from 'react';
 
 export default function SplashScreen({ navigation }) {
@@ -13,9 +13,11 @@ export default function SplashScreen({ navigation }) {
     }).start();
 
     // Navigate after 2 seconds
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       navigation.replace('Register');
     }, 2000);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const width = progress.interpolate({
@@ -25,6 +27,7 @@ export default function SplashScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor="#2ecc71" barStyle="light-content" />
       <Image
         source={require('../assets/logo.png')}
         style={styles.logo}
@@ -38,27 +41,31 @@ export default function SplashScreen({ navigation }) {
   );
 }
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#ECFAD5', // primary app color
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   logo: {
-    width: 150,
-    height: 150,
-    marginBottom: 30
+    width: 180,
+    height: 180,
+    marginBottom: 40,
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: '#fff',
   },
   progressContainer: {
     width: '80%',
-    height: 8,
-    backgroundColor: '#ddd',
+    height: 10,
+    backgroundColor: '#a5e49d',
     borderRadius: 5,
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   progressBar: {
     height: '100%',
-    backgroundColor: '#2e7dff',
-    borderRadius: 5
-  }
+    backgroundColor: '#2ecc71',
+    borderRadius: 5,
+  },
 });

@@ -23,13 +23,12 @@ export default function HomeScreen({ navigation }) {
     const timer = setInterval(() => {
       setDateTime(new Date());
     }, 1000);
-
     return () => clearInterval(timer);
   }, []);
 
   const handleLogout = async () => {
     await AsyncStorage.removeItem('user');
-    navigation.replace('Register');
+    navigation.replace('Login');
   };
 
   const images = [
@@ -42,31 +41,33 @@ export default function HomeScreen({ navigation }) {
   ];
 
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.headerText}>Welcome {username}</Text>
-          <Text style={styles.dateText}>
-            {dateTime.toLocaleDateString()} | {dateTime.toLocaleTimeString()}
-          </Text>
+        {/* Header */}
+        <View style={styles.header}>
+          <View>
+            <Text style={styles.headerText}>Welcome {username}</Text>
+            <Text style={styles.dateText}>
+              {dateTime.toLocaleDateString()} | {dateTime.toLocaleTimeString()}
+            </Text>
+          </View>
+
+          {/* Profile navigation */}
+          <TouchableOpacity onPress={() => navigation.navigate('profile')}>
+            <MaterialIcons name="person" size={26} color="#fff" />
+          </TouchableOpacity>
         </View>
 
-        <TouchableOpacity onPress={handleLogout}>
-          <MaterialIcons name="logout" size={26} color="#fff" />
-        </TouchableOpacity>
-      </View>
 
-      {/* Image Grid */}
-      <View style={styles.grid}>
-        {images.map((img, index) => (
-          <View key={index} style={styles.card}>
-            <Image source={img} style={styles.image} />
-          </View>
-        ))}
+        {/* Image Grid */}
+        <View style={styles.grid}>
+          {images.map((img, index) => (
+            <View key={index} style={styles.card}>
+              <Image source={img} style={styles.image} />
+            </View>
+          ))}
+        </View>
       </View>
-    </View>
     </ScrollView>
   );
 }
@@ -74,12 +75,22 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5'
+    backgroundColor: '#f5f5f5',
+    paddingBottom: 20
   },
-  header: { 
-    padding: 15, 
-    backgroundColor: '#A5E49D', 
-    alignItems: 'center' 
+  header: {
+    padding: 15,
+    backgroundColor: '#2ecc71', // primary green
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15,
+    elevation: 4,
+    shadowColor: '#2ecc71',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4
   },
   headerText: {
     color: '#fff',
@@ -105,7 +116,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     elevation: 4,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    shadowColor: '#999',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3
   },
   image: {
     width: '80%',

@@ -1,5 +1,5 @@
 // screens/NotificationScreen.js
-import { View, Text, FlatList, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useState } from 'react';
 
@@ -27,17 +27,17 @@ export default function NotificationScreen() {
         data={notifications}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View
+          <TouchableOpacity
             style={[
               styles.notificationCard,
               readIds.includes(item.id) && styles.readCard,
             ]}
-            onTouchEnd={() => handlePress(item.id)}
+            onPress={() => handlePress(item.id)}
           >
             <MaterialIcons
               name={readIds.includes(item.id) ? 'notifications-none' : 'notifications'}
               size={24}
-              color={readIds.includes(item.id) ? '#b0c4de' : '#A5E49D'}
+              color={readIds.includes(item.id) ? '#999' : '#2ecc71'}
               style={styles.icon}
             />
             <Text
@@ -52,11 +52,11 @@ export default function NotificationScreen() {
               <MaterialIcons
                 name="check-circle"
                 size={20}
-                color="#A5E49D"
+                color="#2ecc71"
                 style={styles.readCheck}
               />
             )}
-          </View>
+          </TouchableOpacity>
         )}
         contentContainerStyle={{ paddingBottom: 20 }}
       />
@@ -67,14 +67,14 @@ export default function NotificationScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#eaf6f6',
+    backgroundColor: '#f5f5f5',
     paddingTop: width < 400 ? 18 : 30,
     paddingHorizontal: width < 400 ? 8 : 16,
   },
   title: {
     fontSize: width < 400 ? 20 : 24,
     fontWeight: 'bold',
-    color: '#A5E49D',
+    color: '#2ecc71',
     marginBottom: width < 400 ? 12 : 20,
     alignSelf: 'center',
   },
@@ -82,28 +82,28 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#fff',
-    borderRadius: 4,
+    borderRadius: 8,
     padding: width < 400 ? 10 : 18,
     marginBottom: width < 400 ? 8 : 14,
     elevation: 3,
-    shadowColor: '#A5E49D',
+    shadowColor: '#2ecc71',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
+    shadowOpacity: 0.1,
     shadowRadius: 4,
   },
   readCard: {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#e0e0e0',
   },
   icon: {
     marginRight: 12,
-    color: '#A5E49D',
   },
   notificationText: {
     fontSize: width < 400 ? 14 : 16,
     color: '#333',
+    flex: 1,
   },
   readText: {
-    color: '#b0c4de',
+    color: '#999',
     textDecorationLine: 'line-through',
   },
   readCheck: {

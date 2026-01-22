@@ -11,17 +11,13 @@ export default function RegisterScreen({ navigation }) {
   const [error, setError] = useState('');
 
   const register = async () => {
-    // Validation
     if (!username || !password) {
       setError('Please fill all fields');
       return;
     }
 
     try {
-      await AsyncStorage.setItem(
-        'user',
-        JSON.stringify({ username, password })
-      );
+      await AsyncStorage.setItem('user', JSON.stringify({ username, password }));
       navigation.replace('Login');
     } catch (err) {
       setError('Registration failed. Please try again.');
@@ -38,7 +34,7 @@ export default function RegisterScreen({ navigation }) {
           {/* Header */}
           <View style={styles.header}>
             <View style={styles.iconContainer}>
-              <MaterialIcons name="app-registration" size={60} color="#2c7023" />
+              <MaterialIcons name="app-registration" size={60} color="#2ecc71" />
             </View>
             <Text style={styles.title}>Create Account</Text>
             <Text style={styles.subtitle}>Sign up to get started</Text>
@@ -46,56 +42,47 @@ export default function RegisterScreen({ navigation }) {
 
           {/* Form */}
           <View style={styles.formContainer}>
-            {/* Username Input */}
             <PaperInput
               label="Username"
               value={username}
               onChangeText={setUsername}
               mode="outlined"
-              left={<PaperInput.Icon icon={() => <Ionicons name="person" size={24} color="#A5E49D" />} />}
+              left={<PaperInput.Icon icon={() => <Ionicons name="person" size={24} color="#2ecc71" />} />}
               style={styles.input}
               theme={{
                 colors: {
-                  primary: '#A5E49D',
-                  outline: '#A5E49D',
+                  primary: '#2ecc71',
+                  outline: '#2ecc71',
                 },
               }}
               outlineColor="#ddd"
-              activeOutlineColor="#A5E49D"
+              activeOutlineColor="#2ecc71"
             />
 
-            {/* Password Input */}
             <PaperInput
               label="Password"
               value={password}
               onChangeText={setPassword}
               secureTextEntry={!showPassword}
               mode="outlined"
-              left={<PaperInput.Icon icon={() => <Ionicons name="lock-closed" size={24} color="#A5E49D" />} />}
+              left={<PaperInput.Icon icon={() => <Ionicons name="lock-closed" size={24} color="#2ecc71" />} />}
               right={
                 <PaperInput.Icon
-                  icon={() => (
-                    <Ionicons
-                      name={showPassword ? 'eye-off' : 'eye'}
-                      size={24}
-                      color="#A5E49D"
-                    />
-                  )}
+                  icon={() => <Ionicons name={showPassword ? 'eye-off' : 'eye'} size={24} color="#2ecc71" />}
                   onPress={() => setShowPassword(!showPassword)}
                 />
               }
               style={styles.input}
               theme={{
                 colors: {
-                  primary: '#A5E49D',
-                  outline: '#A5E49D',
+                  primary: '#2ecc71',
+                  outline: '#2ecc71',
                 },
               }}
               outlineColor="#ddd"
-              activeOutlineColor="#A5E49D"
+              activeOutlineColor="#2ecc71"
             />
 
-            {/* Error Message */}
             {error ? (
               <View style={styles.errorContainer}>
                 <MaterialIcons name="error-outline" size={20} color="#ff4444" />
@@ -103,13 +90,11 @@ export default function RegisterScreen({ navigation }) {
               </View>
             ) : null}
 
-            {/* Register Button */}
             <TouchableOpacity style={styles.registerButton} onPress={register}>
               <Text style={styles.registerButtonText}>Register</Text>
-              <MaterialIcons name="arrow-forward" size={24} color="#2c7023" />
+              <MaterialIcons name="arrow-forward" size={24} color="#fff" />
             </TouchableOpacity>
 
-            {/* Login Link */}
             <View style={styles.loginContainer}>
               <Text style={styles.loginText}>Already have an account? </Text>
               <TouchableOpacity onPress={() => navigation.navigate('Login')}>
@@ -124,22 +109,10 @@ export default function RegisterScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ECFAD5',
-  },
-  keyboardView: {
-    flex: 1,
-  },
-  scrollContent: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    padding: 20,
-  },
-  header: {
-    alignItems: 'center',
-    marginBottom: 40,
-  },
+  container: { flex: 1, backgroundColor: '#ECFAD5' },
+  keyboardView: { flex: 1 },
+  scrollContent: { flexGrow: 1, justifyContent: 'center', padding: 20 },
+  header: { alignItems: 'center', marginBottom: 40 },
   iconContainer: {
     width: 100,
     height: 100,
@@ -149,57 +122,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
   },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '#2c7023',
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#2c7023',
-    opacity: 0.8,
-  },
+  title: { fontSize: 32, fontWeight: 'bold', color: '#2ecc71', marginBottom: 8 },
+  subtitle: { fontSize: 16, color: '#2ecc71', opacity: 0.8 },
   formContainer: {
     backgroundColor: '#fff',
     borderRadius: 20,
     padding: 20,
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 4.65,
     elevation: 8,
   },
-  input: {
-    marginBottom: 15,
-    backgroundColor: '#fff',
-  },
-  errorContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#ECFAD5',
-    padding: 10,
-    borderRadius: 8,
-    marginBottom: 15,
-  },
-  errorText: {
-    color: '#ff4444',
-    marginLeft: 8,
-    fontSize: 14,
-  },
+  input: { marginBottom: 15, backgroundColor: '#fff' },
+  errorContainer: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#ECFAD5', padding: 10, borderRadius: 8, marginBottom: 15 },
+  errorText: { color: '#ff4444', marginLeft: 8, fontSize: 14 },
   registerButton: {
-    backgroundColor: '#A5E49D',
+    backgroundColor: '#2ecc71',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -208,33 +152,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 10,
     marginBottom: 20,
-    shadowColor: '#A5E49D',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
+    shadowColor: '#2ecc71',
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 4.65,
     elevation: 8,
   },
-  registerButtonText: {
-    color: '#2c7023',
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginRight: 10,
-  },
-  loginContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  loginText: {
-    color: '#666',
-    fontSize: 14,
-  },
-  loginLink: {
-    color: '#2c7023',
-    fontSize: 14,
-    fontWeight: 'bold',
-  },
+  registerButtonText: { color: '#fff', fontSize: 18, fontWeight: 'bold', marginRight: 10 },
+  loginContainer: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center' },
+  loginText: { color: '#666', fontSize: 14 },
+  loginLink: { color: '#2ecc71', fontSize: 14, fontWeight: 'bold' },
 });

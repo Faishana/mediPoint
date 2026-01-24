@@ -1,11 +1,13 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
+import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useState } from 'react';
+import { TextInput as PaperInput } from 'react-native-paper';
 
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [msg, setMsg] = useState('');
 
   const login = async () => {
@@ -29,30 +31,54 @@ export default function LoginScreen({ navigation }) {
           <Text style={styles.title}>Login</Text>
 
           {/* Username Input */}
-          <View style={styles.inputWrapper}>
-            <MaterialIcons name="person" size={24} color="#2ecc71" style={styles.icon} />
-            <TextInput
-              placeholder="Username"
-              value={username}
-              onChangeText={setUsername}
-              style={styles.input}
-              autoCapitalize="none"
-              placeholderTextColor="#999"
-            />
-          </View>
+          <PaperInput
+            label="Username"
+            value={username}
+            onChangeText={setUsername}
+            mode="outlined"
+            left={<PaperInput.Icon icon={() => <Ionicons name="person" size={24} color="#2ecc71" />} />}
+            style={styles.input}
+            theme={{
+              colors: {
+                primary: '#2ecc71',
+                outline: '#2ecc71',
+              },
+            }}
+            outlineColor="#ddd"
+            activeOutlineColor="#2ecc71"
+            autoCapitalize="none"
+          />
 
           {/* Password Input */}
-          <View style={styles.inputWrapper}>
-            <MaterialIcons name="lock" size={24} color="#2ecc71" style={styles.icon} />
-            <TextInput
-              placeholder="Password"
-              secureTextEntry
-              value={password}
-              onChangeText={setPassword}
-              style={styles.input}
-              placeholderTextColor="#999"
-            />
-          </View>
+          <PaperInput
+            label="Password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry={!showPassword}
+            mode="outlined"
+            left={<PaperInput.Icon icon={() => <Ionicons name="lock-closed" size={24} color="#2ecc71" />} />}
+            right={
+              <PaperInput.Icon
+                icon={() => (
+                  <Ionicons
+                    name={showPassword ? 'eye-off' : 'eye'}
+                    size={24}
+                    color="#2ecc71"
+                  />
+                )}
+                onPress={() => setShowPassword(!showPassword)}
+              />
+            }
+            style={styles.input}
+            theme={{
+              colors: {
+                primary: '#2ecc71',
+                outline: '#2ecc71',
+              },
+            }}
+            outlineColor="#ddd"
+            activeOutlineColor="#2ecc71"
+          />
 
           {/* Login Button */}
           <TouchableOpacity style={styles.buttonContainer} onPress={login}>
@@ -62,7 +88,7 @@ export default function LoginScreen({ navigation }) {
           {/* Error Message */}
           {msg ? <Text style={styles.error}>{msg}</Text> : null}
 
-          {/* Optional: Register Link */}
+          {/* Register Link */}
           <View style={styles.registerContainer}>
             <Text style={styles.registerText}>Don't have an account? </Text>
             <TouchableOpacity onPress={() => navigation.navigate('Register')}>
@@ -101,32 +127,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     letterSpacing: 1.2,
   },
-  inputWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: '#2ecc71',
-    marginBottom: 18,
-    paddingHorizontal: 10,
-    elevation: 2,
-    shadowColor: '#2ecc71',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.08,
-    shadowRadius: 3,
-  },
-  icon: {
-    marginRight: 8,
-    color: '#2ecc71',
-  },
   input: {
-    flex: 1,
-    padding: 14,
-    fontSize: 16,
-    backgroundColor: 'transparent',
-    borderWidth: 0,
-    color: '#333',
+    marginBottom: 18,
+    backgroundColor: '#fff',
   },
   buttonContainer: {
     backgroundColor: '#2ecc71',
@@ -159,8 +162,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     borderRadius: 20,
     elevation: 4,
-    borderWidth: 2,
-    borderColor: '#2ecc71',
+    
   },
   registerContainer: {
     flexDirection: 'row',

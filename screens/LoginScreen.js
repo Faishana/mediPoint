@@ -76,17 +76,7 @@ export default function LoginScreen({ navigation }) {
             <Text style={styles.tagline}>Secure Medical Login</Text>
           </View>
 
-          {/* Profile Image - Centered and properly styled */}
-          <View style={styles.profileContainer}>
-            <View style={styles.profileWrapper}>
-              <Image
-                source={require("../assets/profile1.jpg")}
-                style={styles.profileImage}
-                resizeMode="cover"
-              />
-            </View>
-          </View>
-
+          
           {/* Form Container */}
           <View style={styles.formContainer}>
             <Text style={styles.title}>Login to Your Account</Text>
